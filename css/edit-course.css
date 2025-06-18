@@ -1,0 +1,131 @@
+body {
+    background: linear-gradient(135deg, #667eea, #764ba2, #8E44AD);
+    background-size: 400% 400%;
+    animation: gradientAnimation 15s ease infinite;
+    min-height: 100vh;
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.navbar.bg-dark {
+    background-color: rgba(33, 37, 41, 0.8) !important;
+    backdrop-filter: blur(5px);
+}
+
+.navbar-brand.logo {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    color: #FFFFFF !important;
+}
+
+.navbar-brand.logo .fa-brain {
+    color: #20C997;
+}
+
+.search-form {
+    width: 100%;
+    max-width: 400px;
+}
+
+.cart-link {
+    position: relative;
+    display: inline-block;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    padding: 2px 6px;
+    border-radius: 50%;
+    background: #dc3545;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: bold;
+}
+
+.form-container {
+    background-color: #1d3557;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 2.5rem;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+.form-container h1 {
+    color: #FFFFFF;
+    font-weight: bold;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: 1.5rem !important;
+}
+
+.form-container .form-group label {
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+.form-container .form-control {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #FFFFFF;
+}
+
+.form-container .form-control:focus {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-color: #20C997;
+    color: #FFFFFF;
+    box-shadow: 0 0 8px rgba(32, 201, 151, 0.5);
+}
+
+.form-container .form-text.text-muted {
+    color: #BDBDBD !important;
+}
+
+.current-image-preview {
+    max-width: 150px;
+    height: auto;
+    display: block;
+    margin-top: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.text-light {
+    color: #f8f9fa !important;
+}
+
+.btn-custom {
+    border-radius: 8px;
+    font-weight: bold;
+    padding: 0.6rem 1.5rem;
+    border: none;
+    color: white;
+    transition: opacity 0.2s ease;
+}
+
+.btn-custom:hover {
+    opacity: 0.85;
+    color: white;
+}
+
+.btn-submit {
+    background-color: #ffc107;
+    color: #1d3557 !important;
+}
+
+.btn-cancel {
+    background-color: #6c757d;
+}

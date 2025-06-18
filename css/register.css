@@ -1,0 +1,87 @@
+body {
+    background: linear-gradient(135deg, #1e3c72, #2a5298, #8E44AD);
+    background-size: 400% 400%;
+    animation: gradientAnimation 15s ease infinite;
+    height: 100vh;
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.register-container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 40px;
+    border: none;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    color: #f1f1f1;
+}
+
+.register-container h2 {
+    color: #20C997;
+    text-shadow: 0 0 5px rgba(32, 201, 151, 0.5);
+    font-weight: bold;
+}
+
+.register-container .form-group label {
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+.register-container p {
+    color: #f1f1f1;
+}
+
+.register-container a {
+    color: #20C997;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.register-container a:hover {
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+
+.register-container .form-control {
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #20C997;
+    font-weight: bold;
+}
+
+.register-container .form-control::placeholder {
+    color: #ccc;
+}
+
+.register-container .form-control:focus {
+    border-color: #20C997;
+    color: #20C997;
+    background-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 8px rgba(32, 201, 151, 0.5);
+}
+
+.register-container .btn-success {
+    background-color: #20C997;
+    border-color: #20C997;
+    font-weight: bold;
+    color: #FFFFFF;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.register-container .btn-success:hover {
+    background-color: #1BA984;
+    border-color: #1BA984;
+}

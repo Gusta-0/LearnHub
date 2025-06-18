@@ -1,0 +1,132 @@
+body {
+    background: linear-gradient(135deg, #667eea, #764ba2, #8E44AD);
+    background-size: 400% 400%;
+    animation: gradientAnimation 15s ease infinite;
+    min-height: 100vh;
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.navbar.bg-dark {
+    background-color: rgba(33, 37, 41, 0.8) !important;
+    backdrop-filter: blur(5px);
+}
+
+.navbar-brand.logo {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    color: #FFFFFF !important;
+}
+
+.navbar-brand.logo .fa-brain {
+    color: #20C997;
+}
+
+.search-form {
+    width: 100%;
+    max-width: 400px;
+}
+
+.cart-link {
+    position: relative;
+    display: inline-block;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    padding: 2px 6px;
+    border-radius: 50%;
+    background: #dc3545;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: bold;
+}
+
+h1.page-title {
+    color: #FFFFFF;
+    font-weight: bold;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.cart-item, .cart-total, .empty-cart-message {
+    background-color: #1d3557;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    color: #E0E0E0;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 1.5rem;
+}
+
+.cart-item img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 20px;
+}
+
+.cart-item-details {
+    flex-grow: 1;
+}
+
+.cart-item-details h5 {
+    color: #FFF;
+    font-weight: bold;
+}
+
+.cart-item-details .text-muted {
+    color: #BDBDBD !important;
+}
+
+.cart-total {
+    padding: 1.5rem;
+    margin-top: 30px;
+}
+
+.cart-total h3 {
+    color: #FFF;
+    font-weight: bold;
+}
+
+.empty-cart-message {
+    padding: 3rem;
+}
+
+.btn-custom {
+    border-radius: 8px;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border: none;
+    color: white;
+    transition: opacity 0.2s ease;
+}
+
+.btn-custom:hover {
+    opacity: 0.85;
+    color: white;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+}
+
+.btn-checkout {
+    background-color: #28a745;
+}

@@ -5,7 +5,7 @@
       <paths name="XAMPP Local">
         <serverdata>
           <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/cursos_online" local="$PROJECT_DIR$" web="http://localhost/cursos_online/" />
           </mappings>
         </serverdata>
       </paths>
