@@ -2,8 +2,6 @@
 
 ![Dashboard da Plataforma LearnHub](./img-readme/img-logo.png)
 
-> **Dica de Organização:** Para uma melhor apresentação, renomeie o arquivo de imagem para algo mais simples (ex: `learnhub-dashboard.png`) e, se preferir, crie uma pasta separada na raiz do projeto (ex: `/docs` ou `/assets`) apenas para as imagens do `README`.
-
 ## ✒️ Sobre o Projeto
 
 LearnHub é uma aplicação web desenvolvida em PHP puro, que simula uma plataforma de e-commerce para a venda de cursos online. O projeto foi construído com foco em funcionalidades essenciais de um sistema web moderno, incluindo autenticação de usuários, controle de acesso baseado em papéis (Admin e Usuário), gerenciamento completo de cursos (CRUD) e um sistema de carrinho de compras dinâmico com interações via AJAX.
@@ -191,6 +189,7 @@ Este projeto está sob a licença MIT. Você pode ver mais detalhes no arquivo L
 
 Feito com ❤️ por **Gustavo Alves**
 
-* **LinkedIn:** `https://www.linkedin.com/in/gustavo-alves-8300b2302/`
-* **GitHub:** `https://github.com/Gusta-0`
-* **Email:** `gabs.principal.2005@gmail.com`
+* **[LinkedIn](https://www.linkedin.com/in/gustavo-alves-8300b2302/)**
+* **[GitHub](https://github.com/Gusta-0)**
+* **[Email](gabs.principal.2005@gmail.com)**
+  
