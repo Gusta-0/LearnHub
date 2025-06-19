@@ -50,30 +50,6 @@ O design foi cuidadosamente elaborado para ser moderno e responsivo, utilizando 
 
 ---
 
-## 📂 Estrutura do Projeto
-
-/learnhub
-|-- /css                    # Arquivos de estilização CSS personalizados
-|-- /includes               # Conexão com o banco (database.php)
-|-- /uploads                # Pasta para onde as imagens dos cursos são enviadas
-|
-|-- add_course.php          # Formulário para admin adicionar curso
-|-- add_to_cart.php         # Script (AJAX) para adicionar item ao carrinho
-|-- cart.php                # Página do carrinho de compras
-|-- checkout.php            # Script (AJAX) para finalizar a compra
-|-- dashboard.php           # Página principal que lista os cursos
-|-- delete_course.php       # Script para admin deletar curso
-|-- edit_course.php         # Formulário para admin editar curso
-|-- index.php               # Página de Login
-|-- login_process.php       # Script que processa o login
-|-- logout.php              # Script para fazer logout
-|-- register.php            # Página de Cadastro
-|-- register_process.php    # Script que processa o cadastro
-|-- remove_from_cart.php    # Script para remover item do carrinho
-|-- README.md               # Este arquivo
-
----
-
 ## 🚀 Como Executar o Projeto
 
 Siga os passos abaixo para configurar e executar a aplicação em seu ambiente local.
