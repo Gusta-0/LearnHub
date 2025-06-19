@@ -1,48 +1,78 @@
 # LearnHub - Plataforma de Cursos Online
 
-![Dashboard da Plataforma LearnHub](https://i.imgur.com/your-dashboard-image.png) ## ✒️ Sobre o Projeto
+![Dashboard da Plataforma LearnHub](./img-readme/img-logo.png)
 
-LearnHub é uma aplicação web desenvolvida em PHP puro, que simula uma plataforma de e-commerce para a venda de cursos online. O projeto foi construído com foco em funcionalidades essenciais de um sistema web moderno, incluindo autenticação de usuários, controle de acesso baseado em papéis (Admin e Usuário), gerenciamento completo de cursos (CRUD) e um sistema de carrinho de compras.
+> **Dica de Organização:** Para uma melhor apresentação, renomeie o arquivo de imagem para algo mais simples (ex: `learnhub-dashboard.png`) e, se preferir, crie uma pasta separada na raiz do projeto (ex: `/docs` ou `/assets`) apenas para as imagens do `README`.
 
-O design foi cuidadosamente elaborado para ser moderno e responsivo, utilizando fundos com gradientes animados, cards de alto contraste e uma interface de usuário intuitiva.
+## ✒️ Sobre o Projeto
+
+LearnHub é uma aplicação web desenvolvida em PHP puro, que simula uma plataforma de e-commerce para a venda de cursos online. O projeto foi construído com foco em funcionalidades essenciais de um sistema web moderno, incluindo autenticação de usuários, controle de acesso baseado em papéis (Admin e Usuário), gerenciamento completo de cursos (CRUD) e um sistema de carrinho de compras dinâmico com interações via AJAX.
+
+O design foi cuidadosamente elaborado para ser moderno e responsivo, utilizando fundos com gradientes, cards de alto contraste e uma interface de usuário intuitiva para proporcionar uma ótima experiência ao usuário.
 
 ---
 
 ## ✨ Funcionalidades Principais
 
 ### Funcionalidades Gerais
-* **Design Responsivo:** Interface adaptável para diferentes tamanhos de tela.
-* **Sistema de Autenticação:** Páginas de Login e Cadastro com validação e segurança.
-* **Página de Cursos:** Visualização de todos os cursos disponíveis com um layout moderno.
-* **Busca de Cursos:** Campo de pesquisa funcional para encontrar cursos por título ou descrição.
+* **Design Responsivo:** Interface adaptável para desktops, tablets e smartphones.
+* **Sistema de Autenticação:** Páginas de Login e Cadastro com validação de dados e senhas seguras (hash).
+* **Página de Cursos Dinâmica:** Visualização de todos os cursos disponíveis com um layout em cards.
+* **Busca de Cursos:** Campo de pesquisa funcional para filtrar cursos por título ou descrição em tempo real.
 
 ### Funcionalidades do Administrador (`admin`)
-* Acesso a um painel de controle completo.
+* Acesso a um painel de controle com funcionalidades exclusivas.
 * **Gerenciamento de Cursos (CRUD):**
     * **Criar:** Adicionar novos cursos à plataforma através de um formulário dedicado.
     * **Ler:** Visualizar todos os cursos cadastrados.
-    * **Atualizar:** Editar informações de cursos existentes (título, descrição, preço, imagem, etc).
-    * **Deletar:** Remover cursos da plataforma.
-* Upload de imagens de capa para os cursos, com sanitização de nome de arquivo para maior segurança.
+    * **Atualizar:** Editar informações de cursos existentes.
+    * **Deletar:** Remover cursos da plataforma com confirmação.
+* **Upload de Imagens:** Sistema de upload para as capas dos cursos, com sanitização de nome de arquivo para maior segurança.
 
 ### Funcionalidades do Usuário Comum (`user`)
-* Visualizar todos os cursos disponíveis.
-* **Carrinho de Compras:**
-    * Adicionar cursos ao carrinho.
+* Visualizar todos os cursos disponíveis e pesquisar por eles.
+* **Carrinho de Compras com AJAX:**
+    * Adicionar cursos ao carrinho sem recarregar a página.
+    * Receber feedback visual instantâneo (notificações) ao adicionar itens.
     * Visualizar os itens no carrinho e o valor total.
-    * Remover itens do carrinho.
-    * Contador visual na barra de navegação que exibe a quantidade de itens no carrinho.
+    * Remover itens individuais do carrinho.
+    * Contador na barra de navegação que é atualizado dinamicamente.
+    * **Finalização de Compra Simulada:** Limpa o carrinho e exibe uma mensagem de sucesso, proporcionando uma experiência de usuário completa.
 
 ---
 
 ## 🛠️ Tecnologias Utilizadas
 
-* **Back-End:** PHP 8+
-* **Front-End:** HTML5, CSS3, Bootstrap 4
+* **Back-End:** PHP 8+ (com PDO para interações seguras com o banco de dados)
+* **Front-End:** HTML5, CSS3, JavaScript, jQuery (para chamadas AJAX)
+* **Framework CSS:** Bootstrap 4
 * **Banco de Dados:** MySQL
 * **Servidor Local:** XAMPP (Apache, MySQL)
-* **Extensão PHP:** PDO (PHP Data Objects) para conexão segura com o banco de dados.
 * **Ícones:** Font Awesome
+
+---
+
+## 📂 Estrutura do Projeto
+
+/learnhub
+|-- /css                    # Arquivos de estilização CSS personalizados
+|-- /includes               # Conexão com o banco (database.php)
+|-- /uploads                # Pasta para onde as imagens dos cursos são enviadas
+|
+|-- add_course.php          # Formulário para admin adicionar curso
+|-- add_to_cart.php         # Script (AJAX) para adicionar item ao carrinho
+|-- cart.php                # Página do carrinho de compras
+|-- checkout.php            # Script (AJAX) para finalizar a compra
+|-- dashboard.php           # Página principal que lista os cursos
+|-- delete_course.php       # Script para admin deletar curso
+|-- edit_course.php         # Formulário para admin editar curso
+|-- index.php               # Página de Login
+|-- login_process.php       # Script que processa o login
+|-- logout.php              # Script para fazer logout
+|-- register.php            # Página de Cadastro
+|-- register_process.php    # Script que processa o cadastro
+|-- remove_from_cart.php    # Script para remover item do carrinho
+|-- README.md               # Este arquivo
 
 ---
 
@@ -72,12 +102,12 @@ Siga os passos abaixo para configurar e executar a aplicação em seu ambiente l
     * Clique em "Novo" para criar um novo banco de dados.
     * Dê o nome ao banco de dados de `cursos_db` e clique em "Criar".
 
-5.  **Crie as Tabelas**
+5.  **Importe o Banco de Dados**
     * Selecione o banco `cursos_db` que você acabou de criar.
-    * Vá até a aba "SQL" e cole o código abaixo para criar todas as tabelas necessárias. Clique em "Executar".
+    * Vá até a aba "SQL" e cole o código abaixo para criar e popular as tabelas necessárias. Clique em "Executar".
 
     ```sql
-    -- Tabela de Usuários
+    -- Estrutura da tabela `users`
     CREATE TABLE `users` (
       `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
       `username` varchar(50) NOT NULL,
@@ -89,7 +119,12 @@ Siga os passos abaixo para configurar e executar a aplicação em seu ambiente l
       UNIQUE KEY `email` (`email`)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-    -- Tabela de Cursos
+    -- Inserindo o usuário administrador
+    -- Senha: admin123
+    INSERT INTO `users` (`id`, `username`, `email`, `password`, `role`) VALUES
+    (1, 'admin', 'admin@learnhub.com', '$2y$10$w0Jc6B.4J52/AkpB/.2jA.1P6Q2U.35yTIlx9R5gklzXh2mDeFwLq', 'admin');
+
+    -- Estrutura da tabela `courses`
     CREATE TABLE `courses` (
       `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
       `title` varchar(255) NOT NULL,
@@ -101,12 +136,11 @@ Siga os passos abaixo para configurar e executar a aplicação em seu ambiente l
       PRIMARY KEY (`id`)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-    -- Tabela do Carrinho de Compras
+    -- Estrutura da tabela `cart_items`
     CREATE TABLE `cart_items` (
       `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
       `user_id` int(11) UNSIGNED NOT NULL,
       `course_id` int(11) UNSIGNED NOT NULL,
-      `quantity` int(11) UNSIGNED NOT NULL DEFAULT 1,
       `added_at` datetime NOT NULL DEFAULT current_timestamp(),
       PRIMARY KEY (`id`),
       KEY `user_id` (`user_id`),
@@ -126,18 +160,37 @@ Siga os passos abaixo para configurar e executar a aplicação em seu ambiente l
 
 ## 👤 Acesso ao Sistema
 
-### Usuário Comum
-* Você pode criar um usuário comum através da página de cadastro da aplicação. Clique em "Cadastre-se aqui" na tela de login.
+* **Usuário Administrador:** Já vem criado com o script SQL acima.
+    * **Usuário:** `admin`
+    * **Senha:** `admin123`
 
-### Usuário Administrador
-* O usuário `admin` precisa ser criado manualmente para garantir o controle de acesso.
+* **Usuário Comum:** Você pode criar um novo usuário através da página de cadastro da aplicação. Clique em "Cadastre-se aqui" na tela de login.
 
-1.  No phpMyAdmin, selecione a tabela `users`.
-2.  Vá para a aba "SQL" e execute o seguinte comando para criar um usuário administrador.
+---
 
-    ```sql
-    -- A senha é 'admin123'
-    INSERT INTO `users` (`username`, `email`, `password`, `role`) VALUES
-    ('admin', 'admin@learnhub.com', '$2y$10$w0Jc6B.4J52/AkpB/.2jA.1P6Q2U.35yTIlx9R5gklzXh2mDeFwLq', 'admin');
-    ```
-3.  Agora você pode fazer login com o usuário `admin` e a senha `admin123` para acessar as funcionalidades de administrador.
+## 📈 Melhorias Futuras (To-Do)
+
+Este projeto serve como uma excelente base, mas pode ser expandido com novas funcionalidades:
+
+* [ ] **Integração com Gateway de Pagamento:** Implementar um sistema de pagamento real (Stripe, Mercado Pago, etc.).
+* [ ] **Painel "Meus Cursos":** Criar uma área onde o usuário possa ver todos os cursos que já comprou.
+* [ ] **Página de Detalhes do Curso:** Uma página dedicada para cada curso com mais informações, vídeos e avaliações.
+* [ ] **Sistema de Avaliações:** Permitir que usuários avaliem e comentem nos cursos que adquiriram.
+* [ ] **Recuperação de Senha:** Implementar a funcionalidade "Esqueci minha senha".
+* [ ] **Paginação:** Adicionar paginação na lista de cursos para melhor performance com um grande volume de dados.
+
+---
+
+## 📝 Licença
+
+Este projeto está sob a licença MIT. Você pode ver mais detalhes no arquivo LICENSE do repositório.
+
+---
+
+## 👨‍💻 Autor
+
+Feito com ❤️ por **Gustavo Alves**
+
+* **LinkedIn:** `https://www.linkedin.com/in/gustavo-alves-8300b2302/`
+* **GitHub:** `https://github.com/Gusta-0`
+* **Email:** `gabs.principal.2005@gmail.com`

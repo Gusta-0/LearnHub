@@ -2,7 +2,6 @@
 session_start();
 require_once 'includes/database.php';
 
-// Redireciona se o usuário não estiver logado
 if (!isset($_SESSION['user_id'])) {
     header("Location: index.php");
     exit();
@@ -12,7 +11,6 @@ $user_id = $_SESSION['user_id'];
 $username = $_SESSION['username'];
 $user_role = '';
 
-// Obter o papel (role) do usuário logado
 try {
     $stmt_role = $pdo->prepare("SELECT role FROM users WHERE id = :user_id");
     $stmt_role->bindParam(':user_id', $user_id, PDO::PARAM_INT);
@@ -23,7 +21,6 @@ try {
     $user_role = 'user';
 }
 
-// NOVO: Contar itens no carrinho
 $cart_item_count = 0;
 try {
     $stmt_cart = $pdo->prepare("SELECT COUNT(*) FROM cart_items WHERE user_id = :user_id");
@@ -34,15 +31,12 @@ try {
     error_log("Erro ao contar itens do carrinho: " . $e->getMessage());
 }
 
-// NOVO: Lógica de Pesquisa
-$search_term = $_GET['search'] ?? ''; // Pega o termo da busca, se houver
+$search_term = $_GET['search'] ?? '';
 $courses = [];
 
 try {
-    // A query base
     $sql = "SELECT id, title, description, category, price, image, video_link FROM courses";
 
-    // Adiciona a condição de busca se um termo foi digitado
     if (!empty($search_term)) {
         $sql .= " WHERE title LIKE :search OR description LIKE :search";
     }
@@ -83,6 +77,7 @@ try {
         <span class="navbar-toggler-icon"></span>
     </button>
 
+    <div id="alert-container" style="position: fixed; top: 80px; right: 20px; z-index: 9999; width: 300px;"></div>
     <div class="collapse navbar-collapse" id="navbarNav">
         <form class="form-inline mx-auto search-form" action="dashboard.php" method="GET">
             <input class="form-control mr-sm-2 flex-grow-1" type="search" name="search" placeholder="O que você quer aprender?" aria-label="Search" value="<?php echo htmlspecialchars($search_term); ?>">
@@ -95,11 +90,13 @@ try {
                     <a class="nav-link" href="add_course.php">Adicionar Curso</a>
                 </li>
             <?php endif; ?>
-            <li class="nav-item">
+            <li class="nav-item mr-3">
                 <a class="nav-link cart-link" href="cart.php">
                     <i class="fas fa-shopping-cart"></i> Carrinho
                     <?php if ($cart_item_count > 0): ?>
-                        <span class="cart-badge"><?php echo $cart_item_count; ?></span>
+                        <span class="cart-badge" id="cart-badge"><?php echo $cart_item_count; ?></span>
+                    <?php else: ?>
+                        <span class="cart-badge" id="cart-badge" style="display: none;"></span>
                     <?php endif; ?>
                 </a>
             </li>
@@ -144,7 +141,7 @@ try {
                                     <a href="edit_course.php?id=<?php echo $course['id']; ?>" class="btn btn-custom btn-edit btn-sm"><i class="fas fa-edit"></i> Editar</a>
                                     <a href="delete_course.php?id=<?php echo $course['id']; ?>" class="btn btn-custom btn-delete btn-sm" onclick="return confirm('Tem certeza que deseja excluir este curso?');"><i class="fas fa-trash-alt"></i> Excluir</a>
                                 <?php else: ?>
-                                    <form action="add_to_cart.php" method="POST" class="d-inline">
+                                    <form method="POST" class="d-inline add-to-cart-form">
                                         <input type="hidden" name="course_id" value="<?php echo $course['id']; ?>">
                                         <button type="submit" class="btn btn-custom btn-add-cart btn-sm"><i class="fas fa-cart-plus"></i> Adicionar ao Carrinho</button>
                                     </form>
@@ -167,8 +164,73 @@ try {
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        // Escuta o evento de 'submit' nos formulários de adicionar ao carrinho
+        $('.add-to-cart-form').on('submit', function(event) {
+            event.preventDefault();
+
+            var formData = $(this).serialize();
+            var button = $(this).find('button[type="submit"]');
+            var originalButtonHtml = button.html();
+
+            button.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i>');
+
+            $.ajax({
+                type: 'POST',
+                url: 'add_to_cart.php',
+                data: formData,
+                dataType: 'json',
+                success: function (response) {
+                    if (response.success) {
+                        // Atualiza o contador do carrinho na navbar
+                        var badge = $('#cart-badge');
+                        badge.text(response.cart_item_count);
+                        if(response.cart_item_count > 0) {
+                            badge.show();
+                        } else {
+                            badge.hide();
+                        }
+
+                        // Mostra a mensagem de sucesso
+                        showAlert(response.message, 'success');
+                    } else {
+                        // Mostra a mensagem de erro (ex: usuário não logado)
+                        showAlert(response.message, 'danger');
+                    }
+                },
+                error: function() {
+                    // Roda se houver um erro de conexão
+                    showAlert('Não foi possível conectar ao servidor.', 'danger');
+                },
+                complete: function() {
+                    // Reabilita o botão ao final da requisição
+                    button.prop('disabled', false).html(originalButtonHtml);
+                }
+            });
+        });
+
+        // Função para mostrar os alertas dinâmicos
+        function showAlert(message, type) {
+            $('html, body').animate({scrollTop: 0}, 'slow');
+
+            var alertHtml = '<div class="alert alert-' + type + ' alert-dismissible fade show" role="alert">' +
+                message +
+                '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                '<span aria-hidden="true">&times;</span>' +
+                '</button>' +
+                '</div>';
+
+            $('#alert-container').html(alertHtml);
+
+            setTimeout(function() {
+                $('#alert-container .alert').fadeOut('slow', function() { $(this).remove(); });
+            }, 4000);
+        }
+    });
+</script>
 </body>
 </html>
